@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>19 Gifts 🎁</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="floating-hearts" id="floating-hearts"></div>
+
+  <header class="page-header">
+    <p class="eyebrow-note">room one</p>
+    <h1>19 Gifts 🎁</h1>
+    <p>Every card opens into something just for you — a photo, a video, or a note. Tap any of them, in any order.</p>
+  </header>
+
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  <p class="progress-label" id="progress-label">0 of 19 opened</p>
+
+  <main class="gift-grid" id="gift-grid"></main>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-card" id="modal-card"></div>
+  </div>
+
+  <nav class="nav-dock">
+    <a href="index.html"><span class="dock-icon">🏠</span>Home</a>
+    <a href="gifts.html"><span class="dock-icon">🎁</span>Gifts</a>
+    <a href="story.html"><span class="dock-icon">📖</span>Story</a>
+    <a href="notes.html"><span class="dock-icon">💌</span>Notes</a>
+    <a href="wishes.html"><span class="dock-icon">🫙</span>Wishes</a>
+    <a href="letter.html"><span class="dock-icon">✉️</span>Letter</a>
+  </nav>
+
+  <script src="app.js"></script>
+  <script>
+/* =========================================================================
+   EDIT YOUR 19 GIFTS HERE
+   - type: "text" | "image" | "video"
+   - media: for image/video, a path like "assets/images/gift-02.jpg" or
+     "assets/videos/gift-03.mp4" (drop your files into those folders).
+     Leave "" for text gifts, or if you haven't added the file yet —
+     a cute placeholder shows instead of breaking.
+   ========================================================================= */
+const GIFTS = [
+  { n: 1,  emoji: "🌱", title: "Where it started",         type: "text",  media: "", text: "Hello ammadi😘.I think i already told you so many times how we met but one more time for you...... I think we are match made in heaven because we are angels ❣️ based on my knowledge we first met on our room(K4 GF-62).And then first we talk is when i am going to college you asked me to do hair style by taking your funk from my hand....💖" },
+  { n: 2,  emoji: "📷", title: "My favorite photo of us",   type: "image", media: "assets/images/a3.jpeg", text: " Do you Know why i Specifically  like this ?? Because in this we both look gorgeous😽" },
+  { n: 3,  emoji: "🎬", title: "A video, just for You",     type: "video", media: "assets/videos/v4.mp4", text: "Happy birthday Ms.Gemini Ganesh." },
+  { n: 4,  emoji: "📖", title: "Something you taught me",   type: "text",  media: "", text: "A habit of seeing it in different percpective with maturity... But it will take some moretime for me to change🤗." },
+  { n: 5,  emoji: "✈️", title: "That trip",                 type: "image", media: "assets/images/a4.jpeg", text: "Our photo from Triupathi trip together, I liked the way we walked like newly  married couple in this dress.... by holding hands and you wear my duppata like a boy and holding my hand...💫 " },
+  { n: 6,  emoji: "😂🎥", title: "A running joke",            type: "video",  media: "assets/videos/v3.mp4", text: "You sleeping peacefully… while I’m busy collecting cute sleeping pics/videos of you (I have large collection of them)😂📸💕" },
+  { n: 7,  emoji: "🎥", title: "Your laugh, on camera",      type: "video", media: "assets/videos/v1.mp4", text: "A clip of both laughing — the real...." },
+  { n: 8,  emoji: "🌟", title: "What I'm proud of you ", type: "text",  media: "", text: "The way you Handle tough situations.....🎀" },
+  { n: 9,  emoji: "🖼️", title: "The very first photo of us",      type: "image", media: "assets/images/a5.jpeg", text: "The first picture we both took....🫶🏻" },
+  { n: 10, emoji: "🤍", title: "Halfway there",             type: "text",  media: "", text: "A little thank-you for the last ten together." },
+  { n: 11, emoji: "🎵", title: "Our song, Our dance",         type: "video", media: "assets/videos/v2.mp4", text: "A clip of 'our song our vibe......❤️'." },
+  { n: 12, emoji: "🤫", title: "A tiny confession",         type: "text",  media: "", text: "I think i told you everything but one confession i like you the way you are....😘" },
+  { n: 13, emoji: "😄", title: "Our, mid-laugh",            type: "image", media: "assets/images/a6.jpeg", text: "A candid, our real smile photo." },
+  { n: 14, emoji: "🤝", title: "A promise",                 type: "text",  media: "", text: "I will irritate you always as i am doing now....😂" },
+  { n: 15, emoji: "👨‍👩‍👧", title: "Our people",             type: "image", media: "assets/images/a7.jpeg", text: "A photo with Our friends who loves you more too." },
+  { n: 16, emoji: "💌", title: "If You could see this",     type: "video", media: "assets/videos/gift-16.mp4", text: "A message from someone else she loves." },
+  { n: 17, emoji: "👗", title: "Dressed up, once",          type: "image", media: "assets/images/a8.jpeg", text: "A photo of you dolled up." },
+  { n: 18, emoji: "🔭", title: "Next year, together",       type: "text",  media: "", text: "We have to secure a job and do celebrate more birthdays like this......🫶🏻" },
+  { n: 19, emoji: "🎉", title: "Happy birthday",            type: "video", media: "assets/videos/v6.mp4", text: ".......❤️......." }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  initFloatingHearts('floating-hearts', 8);
+  const grid = document.getElementById('gift-grid');
+  const modalOverlay = document.getElementById('modal-overlay');
+  const modalCard = document.getElementById('modal-card');
+  const progressFill = document.getElementById('progress-fill');
+  const progressLabel = document.getElementById('progress-label');
+
+  // In-memory only — resets to 0 every time the page is refreshed or reopened.
+  const opened = new Set();
+
+  function saveProgress(){
+    progressFill.style.width = `${(opened.size / GIFTS.length) * 100}%`;
+    progressLabel.textContent = `${opened.size} of ${GIFTS.length} opened`;
+  }
+
+  GIFTS.forEach((gift) => {
+    const card = document.createElement('button');
+    card.className = 'gift-card';
+    card.style.setProperty('--tilt', `${(Math.random() * 5 - 2.5).toFixed(2)}deg`);
+    card.setAttribute('aria-label', `Open gift ${gift.n}`);
+    card.innerHTML = `<span class="gift-emoji">${gift.emoji}</span><span class="gift-number">${gift.n}</span>`;
+    card.addEventListener('click', () => openGift(gift, card));
+    grid.appendChild(card);
+  });
+  saveProgress();
+
+  function mediaMarkup(gift) {
+    if (gift.type === 'text' || !gift.media) {
+      if (gift.type === 'text') return '';
+      const icon = gift.type === 'image' ? '🖼️' : '🎬';
+      return `<div class="media-placeholder"><span class="icon">${icon}</span><span>Add your ${gift.type} at <strong>${gift.media || (gift.type==='image'?'assets/images/...':'assets/videos/...')}</strong>.</span></div>`;
+    }
+    if (gift.type === 'image') {
+      return `<div class="media-slot"><img src="${gift.media}" alt="${gift.title}" onerror="this.parentElement.outerHTML=getPlaceholder('image','${gift.media}')"></div>`;
+    }
+    return `<div class="media-slot"><video controls preload="none" onerror="this.parentElement.outerHTML=getPlaceholder('video','${gift.media}')"><source src="${gift.media}"></video></div>`;
+  }
+
+  window.getPlaceholder = (kind, path) => `<div class="media-placeholder"><span class="icon">${kind==='image'?'🖼️':'🎬'}</span><span>Add your ${kind} at <strong>${path}</strong>, then refresh.</span></div>`;
+
+  function openGift(gift, card) {
+    modalCard.innerHTML = `
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-label">Gift ${gift.n} of 19 ${gift.emoji}</div>
+      <h3>${gift.title}</h3>
+      ${mediaMarkup(gift)}
+      <p class="modal-text">${gift.text}</p>
+    `;
+    modalOverlay.classList.add('visible');
+    modalCard.querySelector('.modal-close').addEventListener('click', () => modalOverlay.classList.remove('visible'));
+    if (!opened.has(gift.n)) { opened.add(gift.n); card.classList.add('opened'); saveProgress(); }
+  }
+  modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('visible'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modalOverlay.classList.remove('visible'); });
+});
+  </script>
+</body>
+</html>

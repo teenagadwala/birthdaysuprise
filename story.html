@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story 📖</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="floating-hearts" id="floating-hearts"></div>
+
+  <header class="page-header">
+    <p class="eyebrow-note">room two</p>
+    <h1>Our Story 📖</h1>
+    <p>A few of the moments that got us here. Edit the dates and details below to make it yours.</p>
+  </header>
+
+  <main class="timeline" id="timeline"></main>
+
+  <nav class="nav-dock">
+    <a href="index.html"><span class="dock-icon">🏠</span>Home</a>
+    <a href="gifts.html"><span class="dock-icon">🎁</span>Gifts</a>
+    <a href="story.html"><span class="dock-icon">📖</span>Story</a>
+    <a href="notes.html"><span class="dock-icon">💌</span>Notes</a>
+    <a href="wishes.html"><span class="dock-icon">🫙</span>Wishes</a>
+    <a href="letter.html"><span class="dock-icon">✉️</span>Letter</a>
+  </nav>
+
+  <script src="app.js"></script>
+  <script>
+/* EDIT YOUR TIMELINE HERE — add, remove, or rewrite entries freely. */
+const MOMENTS = [
+  { date: "The beginning", title: "How we met", text: " The first time when we talk is when i am going to college you asked me to do hair style by taking your funk from my hand..... i thought she is very stylish girl😳 And then you  frequently came to me to ask maths questions and for the wall also ....i think thats how we make our bond strog together" },
+  { date: "A few weeks in", title: "The first real conversation", text: "Our fate also  wants us to  know more about ourselves that is why they gave us the seating positions like C3(you )and D3(me) and that's how we started spending 24 hours together.........🥹" },
+  { date: "First trip", title: "Somewhere new, together", text: "Our first trip Tirupathi which i will never forget in my like and also your sacrifices like window seat 😏." },
+  { date: "A Beautifl memory", title: "Getting through it together", text: "In PUC we slept on ground under sky 🌙 💤 that is one of the best thing we did i think. Same in your house tooo" },
+  { date: "This year", title: "A recent favorite memory", text: "This year our Tirupathi trip ,mgb mall ,biryani point especially your home......💝" },
+  { date: "Today", title: "Right now", text: "Today, because an Angel friend is born NOTE: here angel is mee...🤭 ." }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  initFloatingHearts('floating-hearts', 8);
+  const timeline = document.getElementById('timeline');
+  MOMENTS.forEach(m => {
+    const item = document.createElement('div');
+    item.className = 'timeline-item';
+    item.innerHTML = `
+      <span class="timeline-dot"></span>
+      <div class="timeline-date">${m.date}</div>
+      <h3>${m.title}</h3>
+      <p>${m.text}</p>
+    `;
+    timeline.appendChild(item);
+  });
+});
+  </script>
+</body>
+</html>

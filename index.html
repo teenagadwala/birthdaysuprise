@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💌</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="envelope-screen">
+    <div class="envelope-wrap">
+      <div class="envelope" id="envelope" tabindex="0" role="button" aria-label="Open the envelope">
+        <div class="envelope-letter"><p>to my favorite person 🤍</p></div>
+        <div class="envelope-back"></div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-seal">♥</div>
+      </div>
+      <p class="envelope-hint">tap the envelope to open it 💌</p>
+    </div>
+  </div>
+
+  <div class="floating-hearts" id="floating-hearts"></div>
+
+  <header class="page-header">
+    <p class="eyebrow-note">🎉 happy birthday 🎉</p>
+    <h1>I made you a little world. 🤍</h1>
+    <p>Five small rooms, each with something different inside. Wander through them in any order — there's no wrong way to open a birthday.</p>
+  </header>
+
+  <div class="hero-photo-frame">
+    <img src="assets/images/a2.jpeg" alt="A favorite photo of us">
+    <p class="hero-caption">us, always laughing about something 🤍</p>
+  </div>
+
+  <main class="hub">
+    <div class="hub-grid">
+      <a class="door-card" href="gifts.html">
+        <span class="door-seal">01</span>
+        <span class="door-icon">🎁</span>
+        <h3>19 Gifts</h3>
+        <p>Twenty little surprises — photos, videos, and notes. Open them one at a time.</p>
+      </a>
+      <a class="door-card" href="story.html">
+        <span class="door-seal">02</span>
+        <span class="door-icon">📖</span>
+        <h3>Our Story</h3>
+        <p>A timeline of us, from the very beginning to right now.</p>
+      </a>
+      <a class="door-card" href="notes.html">
+        <span class="door-seal">03</span>
+        <span class="door-icon">💌</span>
+        <h3>Love Notes</h3>
+        <p>Ten tiny reasons why. Flip each card to read one.</p>
+      </a>
+      <a class="door-card" href="wishes.html">
+        <span class="door-seal">04</span>
+        <span class="door-icon">🫙</span>
+        <h3>The Wish Jar</h3>
+        <p>Tap the jar for a little wish, as many times as you like.</p>
+      </a>
+      <a class="door-card" href="letter.html">
+        <span class="door-seal">05</span>
+        <span class="door-icon">✉️</span>
+        <h3>One Last Letter</h3>
+        <p>Save this room for whenever you want to feel loved on purpose.</p>
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer-note">
+    <p>Made with entirely too much thought, and all my love.</p>
+    <span class="signature">— always yours 💕</span>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initFloatingHearts('floating-hearts', 10);
+      const envelope = document.getElementById('envelope');
+      const envelopeScreen = document.getElementById('envelope-screen');
+      document.body.style.overflow = 'hidden';
+      envelope.addEventListener('click', () => {
+        if (envelope.classList.contains('open')) return;
+        envelope.classList.add('open');
+        setTimeout(() => {
+          envelopeScreen.classList.add('hidden');
+          document.body.style.overflow = '';
+        }, 1000);
+      });
+      envelope.addEventListener('keypress', (e) => { if (e.key === 'Enter' || e.key === ' ') envelope.click(); });
+    });
+  </script>
+</body>
+</html>

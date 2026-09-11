@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Last Letter ✉️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="floating-hearts" id="floating-hearts"></div>
+  <div class="confetti" id="confetti"></div>
+
+  <header class="page-header">
+    <p class="eyebrow-note">room five</p>
+    <h1>One Last Letter ✉️</h1>
+  </header>
+
+  <main class="letter-page">
+    <div class="letter-paper">
+      <span class="letter-heart">🤍</span>
+      <p class="typewriter-text" id="typewriter-text"></p>
+      <div class="letter-signoff">— always yours Acmo💞    -Nimo</div>
+    </div>
+  </main>
+
+  <nav class="nav-dock">
+    <a href="index.html"><span class="dock-icon">🏠</span>Home</a>
+    <a href="gifts.html"><span class="dock-icon">🎁</span>Gifts</a>
+    <a href="story.html"><span class="dock-icon">📖</span>Story</a>
+    <a href="notes.html"><span class="dock-icon">💌</span>Notes</a>
+    <a href="wishes.html"><span class="dock-icon">🫙</span>Wishes</a>
+    <a href="letter.html"><span class="dock-icon">✉️</span>Letter</a>
+  </nav>
+
+  <script src="app.js"></script>
+  <script>
+/* EDIT YOUR LETTER HERE — write it exactly the way you'd say it out loud. */
+const LETTER = `Happy birthday.
+
+I wanted to build you something instead of just buying you something — a whole little world made of the stuff that actually matters: the story of us, the reasons why, the wishes I have for you, and this, the last of it.
+
+You are genuinely one of the most beautiful girls I know, and I'm not just talking about how you look. Your smile, the way you talk, the way you care about people — everything about you has its own kind of beauty. You're intelligent, and I really love the way you think about things. You're also very practical, which is one of the things I admire most about you. You don't just get carried away; you actually think about what makes sense. And yes, you're a big overthinker 😂, sometimes you think about one small thing in a hundred different ways, but that's also because you care so much. You're such a sweet girl, even if you don't always realize it. You can be angry, stubborn, emotional, and still somehow be the person I adore the most. And after all of this, after everything that makes you who you are, you're finally my Ammadi😘. 
+
+
+Here's to another year of you — exactly as you are, becoming whoever you're becoming next. I'll be right here for it.`;
+
+document.addEventListener('DOMContentLoaded', () => {
+  initFloatingHearts('floating-hearts', 8);
+
+  const target = document.getElementById('typewriter-text');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cursor = document.createElement('span');
+  cursor.className = 'cursor';
+
+  if (reduced) {
+    target.textContent = LETTER;
+  } else {
+    let i = 0;
+    target.appendChild(cursor);
+    const interval = setInterval(() => {
+      if (i >= LETTER.length) { clearInterval(interval); cursor.remove(); burstConfetti(); return; }
+      target.insertBefore(document.createTextNode(LETTER[i]), cursor);
+      i++;
+    }, 18);
+  }
+  if (reduced) burstConfetti(true);
+
+  function burstConfetti(skip) {
+    const confetti = document.getElementById('confetti');
+    const glyphs = ['🎉','🤍','❤','✨','🎊'];
+    const total = skip ? 0 : 26;
+    for (let i = 0; i < total; i++) {
+      const span = document.createElement('span');
+      span.textContent = glyphs[i % glyphs.length];
+      span.style.left = `${Math.random() * 100}%`;
+      span.style.animationDelay = `${Math.random() * 0.6}s`;
+      span.style.fontSize = `${1 + Math.random()}rem`;
+      confetti.appendChild(span);
+    }
+    setTimeout(() => { confetti.innerHTML = ''; }, 4500);
+  }
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wish Jar 🫙</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="floating-hearts" id="floating-hearts"></div>
+
+  <header class="page-header">
+    <p class="eyebrow-note">room four</p>
+    <h1>The Wish Jar 🫙</h1>
+    <p>Tap the jar for a little wish. Tap it again for another — there's no limit.</p>
+  </header>
+
+  <section class="jar-section">
+    <button class="jar-btn" id="jar-btn" aria-label="Tap the jar for a wish">🫙</button>
+    <p class="jar-count">Wishes opened: <strong id="jar-count">0</strong></p>
+    <div class="wish-pop" id="wish-pop">
+      <p class="wish-text" id="wish-text"></p>
+    </div>
+  </section>
+
+  <nav class="nav-dock">
+    <a href="index.html"><span class="dock-icon">🏠</span>Home</a>
+    <a href="gifts.html"><span class="dock-icon">🎁</span>Gifts</a>
+    <a href="story.html"><span class="dock-icon">📖</span>Story</a>
+    <a href="notes.html"><span class="dock-icon">💌</span>Notes</a>
+    <a href="wishes.html"><span class="dock-icon">🫙</span>Wishes</a>
+    <a href="letter.html"><span class="dock-icon">✉️</span>Letter</a>
+  </nav>
+
+  <script src="app.js"></script>
+  <script>
+/* EDIT YOUR WISHES HERE — add as many as you like, they repeat randomly. */
+const WISHES = [
+  "🎂 May this year be softer and kinder than the last.",
+  "🌤️ Wishing you more mornings that feel easy.",
+  "📚 May you keep falling in love with new things.",
+  "🌱 Here's to the version of you that's still becoming.",
+  "🎶 May your favorite songs keep finding you at the right moments.",
+  "🫶 May you always know how loved you are.",
+  "🍰 A slightly bigger slice of cake than everyone else, always.",
+  "🌙 Wishing you rest whenever you need it, guilt-free.",
+  "🎁 May good things keep arriving when you least expect them.",
+  "💫 Here's to another year of being exactly, unapologetically you."
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  initFloatingHearts('floating-hearts', 8);
+  const jarBtn = document.getElementById('jar-btn');
+  const wishPop = document.getElementById('wish-pop');
+  const wishText = document.getElementById('wish-text');
+  const jarCount = document.getElementById('jar-count');
+
+  // In-memory only — resets to 0 every time the page is refreshed or reopened.
+  let count = 0;
+  jarCount.textContent = count;
+
+  jarBtn.addEventListener('click', () => {
+    const wish = WISHES[Math.floor(Math.random() * WISHES.length)];
+    wishText.textContent = wish;
+    wishPop.classList.remove('show');
+    void wishPop.offsetWidth; // restart animation
+    wishPop.classList.add('show');
+    count += 1;
+    jarCount.textContent = count;
+  });
+});
+  </script>
+</body>
+</html>

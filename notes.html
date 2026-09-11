@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Notes 💌</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="floating-hearts" id="floating-hearts"></div>
+
+  <header class="page-header">
+    <p class="eyebrow-note">room three</p>
+    <h1>Love Notes 💌</h1>
+    <p>Ten tiny reasons why. Tap a card to flip it over.</p>
+  </header>
+
+  <main class="notes-grid" id="notes-grid"></main>
+
+  <nav class="nav-dock">
+    <a href="index.html"><span class="dock-icon">🏠</span>Home</a>
+    <a href="gifts.html"><span class="dock-icon">🎁</span>Gifts</a>
+    <a href="story.html"><span class="dock-icon">📖</span>Story</a>
+    <a href="notes.html"><span class="dock-icon">💌</span>Notes</a>
+    <a href="wishes.html"><span class="dock-icon">🫙</span>Wishes</a>
+    <a href="letter.html"><span class="dock-icon">✉️</span>Letter</a>
+  </nav>
+
+  <script src="app.js"></script>
+  <script>
+/* EDIT YOUR 10 NOTES HERE — short, specific reasons land best. */
+const NOTES = [
+  "You are beautiful, but your smile is honestly my favorite thing about you.",
+
+"You're kind to people even when you don't have to be.",
+
+"You're an overthinker 😂, but I know it's because you care about things a lot.",
+
+"You get angry pretty easily sometimes 😭, but I know there's always a reason behind it.",
+
+"I love how you try to stay positive even when things aren't going your way.",
+
+"You're stronger than you think you are.",
+
+"You're actually very mature, especially when it comes to important things.",
+
+"I like how practical you are. You don't just say things, you think about what actually makes sense.",
+
+"You know when to be serious and when to just enjoy the moment.",
+
+"You notice small things that I don't even expect you to notice."
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  initFloatingHearts('floating-hearts', 8);
+  const grid = document.getElementById('notes-grid');
+  NOTES.forEach((text, i) => {
+    const card = document.createElement('div');
+    card.className = 'note-card';
+    card.innerHTML = `
+      <div class="note-inner">
+        <div class="note-face note-front">
+          <span class="note-num">${i + 1}</span>
+          <span class="note-hint">tap to read</span>
+        </div>
+        <div class="note-face note-back">${text}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => card.classList.toggle('flipped'));
+    grid.appendChild(card);
+  });
+});
+  </script>
+</body>
+</html>
